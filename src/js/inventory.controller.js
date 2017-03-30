@@ -5,7 +5,12 @@ angular.module('inventory')
   .controller('InventoryController', InventoryController)
 
   InventoryController.$inject = ['InventoryService']; //name of service to inject 'InventoryService'
+// we only inject services
 
+/**
+ * controller function produces newItem
+ * @param {[type]} InventoryService [description]
+ */
   function InventoryController(InventoryService) { // injection will be put in the first place, in this case called 'InventoryService' also, we should keep the name the same
   let vm = this;  // view model
   vm.newItem = {};
@@ -52,6 +57,6 @@ angular.module('inventory')
       vm.sortType = sortField;
       vm.sortReverse = !vm.sortReverse;
     };
-    
+
   }
 }());
