@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en' ng-app='inventory'>
+  <head>
+    <meta charset="utf-8">
+    <link rel='stylesheet'href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <title>Shopular</title>
+  </head>
+  <body>
+    <h1>Shopular</h1>
+
+    <main ng-controller='InventoryController as invCtrl'>
+
+      <!-- <ul>
+        <li ng-repeat='item in invCtrl.inventory'>
+          <h3>Name: {{item.name}} </h3>
+          <p>Price: {{item.price}}</p>
+          <p>Quantity: {{item.quantity}}</p>
+          <p>Color: {{item.color}}</p>
+          <p>Sale Price: {{invCtrl.getPostSalePrice(item)}}</p>
+
+      </ul> -->
+
+
+      <table class='table table-striped col-lg-8'>
+        <tr>
+            <th>Name </th>
+            <th>Price</th>
+            <th>Sale</th>
+            <th>Sale Price</th>
+            <th>Quantity</th>
+            <th>Color</th>
+        </tr>
+
+        <tr ng-repeat='item in invCtrl.inventory'>
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td><img src = 'sale.png' ng-show='item.discount > 0'></td>
+            <td>{{invCtrl.getPostSalePrice(item) | currency:'$'}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.color}}</td>
+        </tr>
+
+
+      </table>
+    </main>
+
+    <!-- This order of is important -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script src='/js/inventory.module.js'></script>
+        <script src='/js/inventory.controller.js'></script>
+
+  </body>
+</html>
