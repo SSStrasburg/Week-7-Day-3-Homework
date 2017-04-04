@@ -10,15 +10,40 @@
 
     <main ng-controller='InventoryController as invCtrl'>
 
-      <!-- <ul>
-        <li ng-repeat='item in invCtrl.inventory'>
-          <h3>Name: {{item.name}} </h3>
-          <p>Price: {{item.price}}</p>
-          <p>Quantity: {{item.quantity}}</p>
-          <p>Color: {{item.color}}</p>
-          <p>Sale Price: {{invCtrl.getPostSalePrice(item)}}</p>
+      <form name='addAnItem' ng-submit='addAnItem.$valid && invCtrl.addAnItem(invCtrl.newItem)' novalidate>
 
-      </ul> -->
+        <p ng-show='addAnItem.name.$touched && !addAnItem.name.$valid'> You must enter a name </p>   <!-- if form is manipulated -->
+        <input ng-model='invCtrl.newItem.name'      type='text'   name='name'     placeholder='New Item Name'             required ng-model='invCtrl.newItem.name'>
+
+        <p ng-show='addAnItem.price.$touched && !addAnItem.price.$valid'> You must enter a price for the item above $0, we aren't a charity!</p>
+        <input ng-model='invCtrl.newItem.price'     type='number' name='price'    placeholder='New Item Price'            required ng-model='invCtrl.newItem.price'     min='0'>
+
+        <p ng-show='addAnItem.quanity.$touched && !addAnItem.quantity.$valid'> You must enter a quantity for the item which is 0 or above</p>
+        <input ng-model='invCtrl.newItem.quantity'  type='number' name='quantity' placeholder='New Item Quantity Number'  required ng-model='invCtrl.newItem.quantity'  min='0'>
+
+        <p ng-show='addAnItem.color.$touched && !addAnItem.color.$valid'> You must enter a color as a string only </p>
+        <input ng-model='invCtrl.newItem.color'     type='text'   name='color'    placeholder='New Item Color'            required ng-model='invCtrl.newItem.color'>
+
+        <p ng-show='addAnItem.discount.$touched && !addAnItem.discount.$valid'> Is their a discount on this item? 0 or positive numbers only.</p>
+        <input ng-model='invCtrl.newItem.discount'  type='number' name='discount' placeholder='New Item Discount'         required ng-model='invCtrl.newItem.discount'  min='0'>
+
+        <input type='submit' value='add an item'>
+
+        </form>
+
+
+        <aside>
+          <button ng-click="sortBy('name')">Sort By Name</button>
+          <span class="sortorder" ng-show="propertyName === 'name' " ng-class="{reverse: reverse}"></span>
+
+          <button ng-click="sortBy('quantity')">Sort By Quantity</button>
+          <span class="sortorder" ng-show="propertyName === 'quantity' " ng-class="{reverse: reverse}"></span>
+
+          <button ng-click="sortBy('price')">Sort By Price</button>
+          <span class="sortorder" ng-show="propertyName === 'price' " ng-class="{reverse: reverse}"></span>
+        </aside>
+
+
 
 
       <table class='table table-striped col-lg-8'>
@@ -39,6 +64,8 @@
             <td>{{item.quantity}}</td>
             <td>{{item.color}}</td>
         </tr>
+      </table>
+
 
 
       </table>
